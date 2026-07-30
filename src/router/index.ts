@@ -3,7 +3,7 @@ import WelcomeScreen from '../components/WelcomeScreen.vue'
 import HelloWorldGame from '../games/hello-world/HelloWorldGame.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/Games/'),
   routes: [
     {
       path: '/',
