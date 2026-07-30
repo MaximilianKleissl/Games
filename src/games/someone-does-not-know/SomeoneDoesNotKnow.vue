@@ -52,7 +52,7 @@ function getGameState(gameCode: string, numPlayers: number, round: number) {
 
 function startGame() {
   if (!gameCode.value || numPlayers.value < 2 || activePlayerIds.value.length === 0) {
-    alert('Please enter valid game settings')
+    alert('Bitte gib gültige Spieleinstellungen ein')
     return
   }
   gameStarted.value = true
@@ -81,29 +81,29 @@ function hideWord() {
 
 const displayText = computed(() => {
   if (wordShownForPlayer.value === null) {
-    return 'Select a player to show their word'
+    return 'Wähle einen Spieler aus, um sein Wort zu zeigen'
   }
   const isPlayerSelected = wordShownForPlayer.value - 1 === selectedPlayer.value
-  return isPlayerSelected ? "YOU DON'T KNOW" : selectedWord.value
+  return isPlayerSelected ? 'DU WEISST ES NICHT' : selectedWord.value
 })
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen p-8 text-center">
     <div v-if="!gameStarted" class="w-full max-w-md">
-      <h1 class="text-5xl mb-8 text-[#42b883]">Someone Does Not Know</h1>
+      <h1 class="text-5xl mb-8 text-[#42b883]">Jemand weiß es nicht</h1>
       <div class="space-y-4">
         <div>
-          <label class="block text-lg mb-2 text-[#35495e]">Game Code</label>
+          <label class="block text-lg mb-2 text-[#35495e]">Spiel-Code</label>
           <input 
             v-model="gameCode" 
             type="text" 
-            placeholder="Enter a code word"
+            placeholder="Gib ein Codewort ein"
             class="w-full px-4 py-3 border-2 border-[#42b883] rounded-lg text-lg focus:outline-none focus:border-[#3aa876]"
           />
         </div>
         <div>
-          <label class="block text-lg mb-2 text-[#35495e]">Number of Players</label>
+          <label class="block text-lg mb-2 text-[#35495e]">Anzahl der Spieler</label>
           <input 
             v-model.number="numPlayers" 
             type="number" 
@@ -113,11 +113,11 @@ const displayText = computed(() => {
           />
         </div>
         <div>
-          <label class="block text-lg mb-2 text-[#35495e]">Active Player IDs (comma-separated)</label>
+          <label class="block text-lg mb-2 text-[#35495e]">Aktive Spieler-IDs (mit Komma getrennt)</label>
           <input 
             v-model="playerIds" 
             type="text" 
-            placeholder="e.g., 1,2,3"
+            placeholder="z.B., 1,2,3"
             class="w-full px-4 py-3 border-2 border-[#42b883] rounded-lg text-lg focus:outline-none focus:border-[#3aa876]"
           />
         </div>
@@ -125,15 +125,15 @@ const displayText = computed(() => {
           @click="startGame" 
           class="w-full px-8 py-4 text-lg bg-[#42b883] text-white border-none rounded-lg cursor-pointer hover:bg-[#3aa876] transition-colors duration-300"
         >
-          Start Game
+          Spiel starten
         </button>
       </div>
     </div>
 
     <div v-else class="w-full max-w-md">
-      <h1 class="text-4xl mb-4 text-[#42b883]">Round {{ round }}</h1>
-      <p class="text-lg mb-2 text-[#35495e]">{{ activePlayerIds.length }} active players</p>
-      <p class="text-sm mb-8 text-[#35495e]">{{ numPlayers }} players total</p>
+      <h1 class="text-4xl mb-4 text-[#42b883]">Runde {{ round }}</h1>
+      <p class="text-lg mb-2 text-[#35495e]">{{ activePlayerIds.length }} aktive Spieler</p>
+      <p class="text-sm mb-8 text-[#35495e]">{{ numPlayers }} Spieler insgesamt</p>
       
       <div class="bg-[#f8f9fa] border-2 border-[#42b883] rounded-xl p-8 mb-8 min-h-48 flex items-center justify-center">
         <p class="text-3xl font-bold" :class="wordShownForPlayer !== null && wordShownForPlayer - 1 === selectedPlayer ? 'text-red-500' : 'text-[#42b883]'">
@@ -149,7 +149,7 @@ const displayText = computed(() => {
             @click="showWordForPlayer(id)" 
             class="px-4 py-3 text-base bg-[#42b883] text-white border-none rounded-lg cursor-pointer hover:bg-[#3aa876] transition-colors duration-300"
           >
-            Show for Player {{ id }}
+            Zeigen für Spieler {{ id }}
           </button>
         </div>
         <button 
@@ -157,25 +157,25 @@ const displayText = computed(() => {
           @click="hideWord" 
           class="w-full px-8 py-4 text-lg bg-[#35495e] text-white border-none rounded-lg cursor-pointer hover:bg-[#2c3e50] transition-colors duration-300"
         >
-          Hide Word
+          Wort verstecken
         </button>
         <button 
           @click="nextRound" 
           class="w-full px-8 py-4 text-lg bg-[#42b883] text-white border-none rounded-lg cursor-pointer hover:bg-[#3aa876] transition-colors duration-300"
         >
-          Next Round
+          Nächste Runde
         </button>
         <button 
           @click="gameStarted = false; round = 1" 
           class="w-full px-8 py-4 text-lg bg-[#35495e] text-white border-none rounded-lg cursor-pointer hover:bg-[#2c3e50] transition-colors duration-300"
         >
-          New Game
+          Neues Spiel
         </button>
       </div>
     </div>
 
     <router-link to="/" class="mt-8 text-[#35495e] no-underline text-lg hover:underline">
-      ← Back to Welcome Screen
+      ← Zurück zur Startseite
     </router-link>
   </div>
 </template>
